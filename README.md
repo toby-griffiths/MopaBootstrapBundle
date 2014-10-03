@@ -15,8 +15,8 @@ To use this bundle with bootstrap 3 use the latest stable release:
 ``` json
 {
     "require": {
-        "mopa/bootstrap-bundle": "~3.0.0",
-        "twbs/bootstrap": "v3.2.0"
+        "mopa/bootstrap-bundle":    "~3.0.0",
+        "twbs/bootstrap":           "v3.2.0"
     }
 }
 ```
@@ -26,8 +26,8 @@ If you wish to use the current master branch, then use the following:
 ``` json
 {
     "require": {
-        "mopa/bootstrap-bundle": "dev-master",
-        "twbs/bootstrap": "dev-master"
+        "mopa/bootstrap-bundle":    "dev-master",
+        "twbs/bootstrap":           "dev-master"
     }
 }
 ```
@@ -37,8 +37,8 @@ For bootstrap 2 use the v2.3.x branch:
 ```json
 {
     "require": {
-        "mopa/bootstrap-bundle": "2.3.x-dev",
-        "twbs/bootstrap": "v2.3.2"
+        "mopa/bootstrap-bundle":    "2.3.x-dev",
+        "twbs/bootstrap":           "v2.3.2"
     }
 }
 ```
@@ -52,7 +52,6 @@ In any case, if something is not working as expected after a update:
 
 * [READ the CHANGELOG!](https://github.com/phiamo/MopaBootstrapBundle/blob/master/CHANGELOG.md)
 
-Recent BackwardsCompatibility breaking changes:
 
 Live Show
 ---------
@@ -90,22 +89,14 @@ Included Features
   * icon support on menu links
 * Twig Extension for multiple icon sets
 
-Translations
-------------
-If you use [KnpPaginatorBundle](https://github.com/KnpLabs/KnpPaginatorBundle) with MopaBootstrapBundle, you can translate labels to your language.
-To do this add new file
-
-```sh
-Resources/translations/pagination.[YOUR LOCALE CODE].yml
-```
-
-As example you have there Polish translation.
-
 Contribute
 ----------
+
 If you want to contribute your code to MopaBootstrapBundle please be sure that your PR's
 are valid to Symfony Coding Standards. You can automatically fix your code for that
 with [PHP-CS-Fixer](http://cs.sensiolabs.org) tool.
+
+Any additional features should include documentation to accompany it.
 
 You can see who already contributed to this project on [Contributors](https://github.com/phiamo/MopaBootstrapBundle/contributors) page
 
