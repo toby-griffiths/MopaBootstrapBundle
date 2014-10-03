@@ -9,12 +9,11 @@
 {% block head %}
 <head>
     <meta charset="{{ _charset }}" />
-    {% block head_style %}
     {# Override this block to add your own files! #}
-    {# To use this without less or sass use the base.html.twig template as your base
-     # Be sure you understand whats going on: have a look into
-     # https://github.com/phiamo/MopaBootstrapBundle/blob/master/Resources/doc/css-vs-less.md
-     #}
+    {% block head_style %}
+    {% stylesheets '@bootstrap_css' %}
+    <link href="{{ asset_url }}" type="text/css" rel="stylesheet" media="screen" />
+    {% endstylesheets %}
     {% endblock head_style %}
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -112,6 +111,9 @@
     Otherwise the regeneration is done on every load in dev more with use_controller: true
      #}
     {% block foot_script_assetic %}
+    {% javascripts '@bootstrap_js' %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
     {% endblock foot_script_assetic %}
 
     <script type="text/javascript">
