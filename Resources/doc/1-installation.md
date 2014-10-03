@@ -195,16 +195,16 @@ Installation
 
 5. Setup Assetic Assets
 
-We have tried to make this as flexible as possible without have lots of different
-versions / tags on github so we have created different configurations for your
-projects:
+    We have tried to make this as flexible as possible without have lots of different
+    versions / tags on github so we have created different configurations for your
+    projects:
 
     - Resources/config/assetic/bootstrap_less.yml
     - Resources/config/assetic/bootstrap_sass.yml
     - Resources/config/assetic/bootstrap_3.2_sass.yml
 
-Depending on which one you use, this will setup your bootstrap assets in an easy
-to use shortcut for assetic:
+    Depending on which one you use, this will setup your bootstrap assets in an easy
+    to use shortcut for assetic:
 
     ```jinja
     {% stylesheets '@bootstrap_css' %}
@@ -212,11 +212,11 @@ to use shortcut for assetic:
     {% endstylesheets %}
     ```
 
-The same goes for `@bootstrap_js` as well. You can choose to use these or not,
-or create your own. Just look at the contents of those files and make your own.
-This method allows us to have one main base template with different assets.
+    The same goes for `@bootstrap_js` as well. You can choose to use these or not,
+    or create your own. Just look at the contents of those files and make your own.
+    This method allows us to have one main base template with different assets.
 
-You can also add more assets to assetic as well:
+    You can also add more assets to assetic as well:
 
     ```jinja
     {% stylesheets '@bootstrap_css' '/bundles/acme/site.css' %}
@@ -224,7 +224,8 @@ You can also add more assets to assetic as well:
     {% endstylesheets %}
     ```
 
-Or copy and paste the config file you're using and make the edits there.
+    Or copy and paste the config file you're using and make the edits there.
+
 ---
 
 [Using bootstrap in the layout](https://github.com/phiamo/MopaBootstrapBundle/blob/master/Resources/doc/2-base-templates.md) >>
