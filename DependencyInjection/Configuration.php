@@ -313,8 +313,8 @@ class Configuration implements ConfigurationInterface
                         ->end()
                     ->end()
                 ->end()
-            ->end();
-        $this->addNavbarConfig($rootNode);
+            ->end()
+        ;
     }
 
     /**
