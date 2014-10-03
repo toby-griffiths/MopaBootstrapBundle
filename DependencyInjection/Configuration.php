@@ -314,28 +314,9 @@ class Configuration implements ConfigurationInterface
                     ->end()
                 ->end()
             ->end();
-        // BC Layer Remove for 3.1
         $this->addNavbarConfig($rootNode);
     }
 
-    // BC Layer Remove for 3.1
-    protected function addNavbarConfig(ArrayNodeDefinition $rootNode)
-    {
-        $rootNode
-            ->children()
-                ->arrayNode('navbar')
-                    ->canBeEnabled()
-                    ->addDefaultsIfNotSet()
-                    ->children()
-                        ->scalarNode('template')
-                            ->defaultValue('MopaBootstrapBundle:Menu:menu.html.twig')
-                            ->cannotBeEmpty()
-                            ->info('Menu template to use when rendering')
-                        ->end()
-                    ->end()
-                ->end()
-            ->end();
-    }
     /**
      * @param \Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $rootNode
      *

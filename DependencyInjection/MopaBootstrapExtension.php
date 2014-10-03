@@ -59,10 +59,6 @@ class MopaBootstrapExtension extends Extension
          * Menu
          */
         if ($this->isConfigEnabled($container, $config['menu']) || $this->isConfigEnabled($container, $config['navbar'])) {
-            // TODO: remove this BC layer
-            if ($this->isConfigEnabled($container, $config['navbar'])) {
-                trigger_error(sprintf('mopa_bootstrap.navbar is deprecated. Use mopa_bootstrap.menu.'), E_USER_DEPRECATED);
-            }
             $loader->load('menu.xml');
             $this->remapParameters($container, 'mopa_bootstrap.menu', $config['menu']);
         }
