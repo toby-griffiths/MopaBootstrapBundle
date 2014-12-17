@@ -1,0 +1,6 @@
+{
+    "name": "mopa-bootstrap",
+    "dependencies": {
+        "bootstrap": "~3.0"
+    }
+}

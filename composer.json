@@ -15,33 +15,23 @@
         }
     ],
     "autoload": {
-        "psr-0": {
+        "psr-4": {
             "Mopa\\Bundle\\BootstrapBundle\\": ""
         }
     },
-    "target-dir": "Mopa/Bundle/BootstrapBundle",
     "require": {
-        "symfony/framework-bundle": "~2.3",
-        "symfony/twig-bundle": "~2.3",
-        "symfony/form": "~2.3",
-        "symfony/console": "~2.3",
-        "mopa/composer-bridge": "~1.3"
+        "symfony/framework-bundle":         "~2.3",
+        "symfony/twig-bundle":              "~2.3",
+        "symfony/form":                     "~2.3",
+        "symfony/console":                  "~2.3",
+        "mopa/composer-bridge":             "~1.3"
     },
     "suggest":  {
-        "twbs/bootstrap": ">2.0,<4.0-dev",
-        "knplabs/knp-paginator-bundle": "~2.3",
-        "knplabs/knp-menu-bundle": "~2.0@dev",
-        "mopa/bootstrap-sandbox-bundle": "~2.3",
-        "craue/formflow-bundle": "~2.0",
-        "twbs/bootstrap-sass": "v3.1.1"
-    },
-    "scripts": {
-        "post-install-cmd": [
-            "Mopa\\Bundle\\BootstrapBundle\\Composer\\ScriptHandler::postInstallSymlinkTwitterBootstrap"
-        ],
-        "post-update-cmd": [
-            "Mopa\\Bundle\\BootstrapBundle\\Composer\\ScriptHandler::postInstallSymlinkTwitterBootstrap"
-        ]
+        "craue/formflow-bundle":            "~2.0",
+        "knplabs/knp-paginator-bundle":     "~2.3",
+        "knplabs/knp-menu-bundle":          "~2.0",
+        "mopa/bootstrap-sandbox-bundle":    "~2.3",
+        "sp/bower-bundle":                  "0.11.*"
     },
     "extra": {
         "branch-alias": {
