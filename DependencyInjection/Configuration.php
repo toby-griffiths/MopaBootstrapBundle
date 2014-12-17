@@ -27,7 +27,6 @@ class Configuration implements ConfigurationInterface
         $this->addFormConfig($rootNode);
         $this->addIconsConfig($rootNode);
         $this->addMenuConfig($rootNode);
-        $this->addInitializrConfig($rootNode);
         $this->addFlashConfig($rootNode);
 
         return $treeBuilder;
@@ -315,80 +314,6 @@ class Configuration implements ConfigurationInterface
                 ->end()
             ->end()
         ;
-    }
-
-    /**
-     * @param \Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $rootNode
-     *
-     * @author Paweł Madej (nysander) <pawel.madej@profarmaceuta.pl>
-     */
-    protected function addInitializrConfig(ArrayNodeDefinition $rootNode)
-    {
-        $rootNode
-            ->children()
-                ->arrayNode('initializr')
-                    ->children()
-                        ->arrayNode('meta')
-                            ->addDefaultsIfNotSet()
-                            ->children()
-                                ->scalarNode('title')
-                                    ->defaultValue('MopaBootstrapBundle')
-                                    ->cannotBeEmpty()
-                                ->end()
-                                ->scalarNode('description')
-                                    ->defaultValue('MopaBootstrapBundle')
-                                    ->cannotBeEmpty()
-                                ->end()
-                                ->scalarNode('keywords')
-                                    ->defaultValue('MopaBootstrapBundle, Twitter Bootstrap, HTML5 Boilerplate')
-                                    ->cannotBeEmpty()
-                                ->end()
-                                ->scalarNode('author_name')
-                                    ->defaultValue('My name')
-                                ->end()
-                                ->scalarNode('author_url')
-                                    ->defaultValue('#')
-                                    ->cannotBeEmpty()
-                                ->end()
-                                ->scalarNode('feed_atom')
-                                ->end()
-                                ->scalarNode('feed_rss')
-                                ->end()
-                                ->scalarNode('sitemap')
-                                ->end()
-                                ->booleanNode('nofollow')
-                                    ->defaultFalse()
-                                ->end()
-                                ->booleanNode('noindex')
-                                    ->defaultFalse()
-                                ->end()
-                            ->end()
-                        ->end()
-                        ->arrayNode('dns_prefetch')
-                            ->treatNullLike(array())
-                            ->defaultValue(array('//ajax.googleapis.com'))
-                            ->prototype('scalar')
-                            ->end()
-                        ->end()
-                        ->arrayNode('google')
-                            ->addDefaultsIfNotSet()
-                            ->treatNullLike(array())
-                            ->children()
-                                ->scalarNode('wt')
-                                    ->end()
-                                ->scalarNode('analytics')
-                                    ->end()
-                                ->booleanNode('extendedanalytics')
-                                    ->defaultFalse()
-                                    ->end()
-                            ->end()
-                        ->end()
-                        ->booleanNode('diagnostic_mode')
-                            ->defaultFalse()
-                        ->end()
-                    ->end()
-                ->end()
-            ->end();
     }
 
     protected function addFlashConfig(ArrayNodeDefinition $rootNode)
