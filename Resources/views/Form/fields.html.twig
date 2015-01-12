@@ -301,7 +301,9 @@
     {% set attr = attr|merge({'class': attr.class|default('')}) %}
     {% spaceless %}
     {{ form_widget(form.hour, { 'horizontal_input_wrapper_class': horizontal_input_wrapper_class|default('col-sm-2')}) }}
-    {{ form_widget(form.minute, { 'horizontal_input_wrapper_class': horizontal_input_wrapper_class|default('col-sm-2')}) }}
+    {% if with_minutes %}
+        {{ form_widget(form.minute, { 'horizontal_input_wrapper_class': horizontal_input_wrapper_class|default('col-sm-2')}) }}
+    {% endif %}
     {% if with_seconds %}
         :{{ form_widget(form.second, { 'horizontal_input_wrapper_class': horizontal_input_wrapper_class|default('col-sm-2') }) }}
     {% endif %}
@@ -352,7 +354,6 @@
 {% block file_widget %}
 {% spaceless %}
 {% set type = type|default('file') %}
-{% set attr = attr|merge({'class': attr.class|default('') ~ ' ' ~ widget_form_control_class}) %}
     {% if widget_addon_prepend|default(null) is not null %}
         {% set widget_addon = widget_addon_prepend %}
         {{ block('widget_addon') }}
@@ -425,7 +426,7 @@
                 {{ mopa_bootstrap_icon(help_label_tooltip.icon) }}
             {% endif %}
             {% if help_label_tooltip.text is not sameas(null) %}
-            {{ help_label_tooltip.text }}
+                {{ help_label_tooltip.text }}
             {% endif %}
         </a>
     </span>
@@ -438,12 +439,12 @@
 
 {% block help_label_popover %}
     <span class="help-block">
-        <a href="#" data-toggle="popover" data-trigger="hover" data-placement="{{ help_label_popover.placement}}" data-title="{{ help_label_popover.title|trans({}, translation_domain) }}" data-content="{{ help_label_popover.content|trans({}, translation_domain) }}" >
+        <a href="#" data-toggle="popover" data-trigger="hover" data-placement="{{ help_label_popover.placement}}" data-title="{{ help_label_popover.title|trans({}, translation_domain) }}" data-content="{{ help_label_popover.content|trans({}, translation_domain) }}" data-html="true">
             {% if help_label_popover.icon is not sameas(false) %}
                 {{ mopa_bootstrap_icon(help_label_popover.icon) }}
             {% endif %}
             {% if help_label_popover.text is not sameas(null) %}
-            {{ help_label_popover.text }}
+                {{ help_label_popover.text }}
             {% endif %}
         </a>
     </span>
@@ -554,9 +555,10 @@
 
 {% block form_widget_remove_btn %}
 {% spaceless %}
-    {% if widget_remove_btn.wrapper_div is not defined and widget_remove_btn.wrapper_div is not sameas(false) %}
+    {% if widget_remove_btn.wrapper_div is defined and widget_remove_btn.wrapper_div is not sameas(false) %}
         <div class="{{ widget_remove_btn.wrapper_div.class }}">
-    {% elseif widget_remove_btn.horizontal_wrapper_div is defined and widget_remove_btn.horizontal_wrapper_div is not sameas(false) %}
+    {% endif %}
+    {% if widget_remove_btn.horizontal_wrapper_div is defined and widget_remove_btn.horizontal_wrapper_div is not sameas(false) %}
         <div class="{{ widget_remove_btn.horizontal_wrapper_div.class }}">
     {% endif %}
     {% if widget_remove_btn|default(null) %}
@@ -564,9 +566,10 @@
     {% set button_values = widget_remove_btn %}
     {{ block('collection_button') }}
     {% endif %}
-    {% if widget_remove_btn.wrapper_div is not defined and widget_remove_btn.wrapper_div is not sameas(false) %}
+    {% if widget_remove_btn.horizontal_wrapper_div is defined and widget_remove_btn.horizontal_wrapper_div is not sameas(false) %}
         </div>
-    {% elseif widget_remove_btn.horizontal_wrapper_div is defined and widget_remove_btn.horizontal_wrapper_div is not sameas(false) %}
+    {% endif %}
+    {% if widget_remove_btn.wrapper_div is defined and widget_remove_btn.wrapper_div is not sameas(false) %}
         </div>
     {% endif %}
 {% endspaceless %}
