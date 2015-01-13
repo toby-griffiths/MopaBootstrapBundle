@@ -1,6 +1,8 @@
 MopaBootstrapBundle
 ===================
 
+[![Build Status](https://travis-ci.org/phiamo/MopaBootstrapBundle.svg?branch=master)](https://travis-ci.org/phiamo/MopaBootstrapBundle)
+
 MopaBootstrapBundle is a collection of code to integrate twitter's bootstrap
 (http://twitter.github.com/bootstrap/) as easy as possible into your Symfony2
 (http://www.symfony.com) Project.
