@@ -10,15 +10,15 @@
 
 namespace Mopa\Bundle\BootstrapBundle\Tests\Form;
 
-use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Mopa\Bundle\BootstrapBundle\Form\Extension as MopaExtensions;
 use Mopa\Bundle\BootstrapBundle\Form\Type as MopaTypes;
-use Symfony\Component\Form\Extension\Core\Type\FormType;
-use Symfony\Component\Form\Forms;
+use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Symfony\Component\Form\FormFactoryInterface;
-use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\EventDispatcher\EventDispatcher;
+use Symfony\Component\Form\Extension\Core\Type\FormType;
+use Symfony\Component\Form\FormBuilder;
+use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\Form\Forms;
 
 /**
  * Mopa\Bundle\BootstrapBundle\Tests\Form\TypeTestCase
@@ -87,7 +87,15 @@ class TypeTestCase extends KernelTestCase
                 ]
             ),
             new MopaExtensions\DatetimeTypeExtension(),
-            new MopaExtensions\DateTypeExtension(),
+            new MopaExtensions\DateTypeExtension(
+                [
+                    'date_wrapper_class' => [
+                        'year' => $this->container->getParameter('mopa_bootstrap.form.date_wrapper_class.year'),
+                        'month' => $this->container->getParameter('mopa_bootstrap.form.date_wrapper_class.month'),
+                        'day' => $this->container->getParameter('mopa_bootstrap.form.date_wrapper_class.day')
+                    ]
+                ]
+            ),
             new MopaExtensions\ErrorTypeFormTypeExtension(
                 ['error_type' => $this->container->getParameter('mopa_bootstrap.form.error_type')]
             ),
@@ -196,4 +204,3 @@ class TypeTestCase extends KernelTestCase
         self::assertEquals($expected->format('c'), $actual->format('c'));
     }
 }
-

@@ -14,10 +14,9 @@ Have a look into the examples in the sandbox:
 
 ### Using bootstrap for Theming
 
-
 Forms are activated by default for your whole project if you have at least
-`form: ~` in your bundle configuration. If you do not want to have this 
-behaviour you can disable it by setting the templating config option to 
+`form: ~` in your bundle configuration. If you do not want to have this
+behaviour you can disable it by setting the templating config option to
 false in app/config.yml.
 There are a bunch of other config variabled to control the templating behaviour globally.
 You can change them globally, on a per form basis and per field.
@@ -25,15 +24,15 @@ You can change them globally, on a per form basis and per field.
 ``` yaml
 mopa_bootstrap:
     form:
-        templating: false # default is true
-        render_fieldset: true # default is true
-        render_collection_item: true # default is true
-        show_legend: true # default is true
-        show_child_legend: false # default is false
-        render_required_asterisk: true # default is false
-        render_optional_text: false # default is true
-        checkbox_label: 'both' # default is both (label|widget|both)
-        error_type: 'block' # default is null
+        templating: false               # default is true
+        render_fieldset: true           # default is true
+        render_collection_item: true    # default is true
+        show_legend: true               # default is true
+        show_child_legend: false        # default is false
+        render_required_asterisk: true  # default is false
+        render_optional_text: false     # default is true
+        checkbox_label: 'both'          # default is both (label|widget|both)
+        error_type: 'block'             # default is null
         collection:
             widget_remove_btn:
                 attr:
@@ -176,7 +175,38 @@ public function buildForm(FormBuilder $builder, array $options)
     //...
 ```
 
-Note: To get the addons working, i had to increase max nesting level of xdebug to 200.
+Widget Button Addons
+-------------
+You can integrate Twitter Bootstrap's form button addons, you can add as many buttons as you need and add `icon` and / or
+`label`. The first button in append show the default values:
+
+```php
+public function buildForm(FormBuilder $builder, array $options)
+{
+    $builder
+        ->add('price', null, array(
+            "widget_btn_append" => array(
+                array(
+                    "type"          => "button",
+                    "label"         => "",
+                    "icon"          => null,
+                    "icon_inverted" => false,
+                ),
+                array(
+                    "icon"     => "remove",
+                )
+            ),
+            "widget_btn_prepend" => array(
+                array(
+                    "text"     => "My text",
+                )
+            )
+        ))
+    ;
+    //...
+```
+
+Note: To get the addons working, I had to increase max nesting level of xdebug to 200.
 
 
 ### Form Field Prefix / Suffix
@@ -307,10 +337,8 @@ results in:
 Collections
 -----------
 
-Look into the more detailed doc:
-
-https://github.com/phiamo/MopaBootstrapBundle/blob/master/Resources/doc/3.1-form-collections.md
+Look into the more [detailed doc](2-form-collections.md).
 
 ---
 
-<< [Using bootstrap in the layout](https://github.com/phiamo/MopaBootstrapBundle/blob/master/Resources/doc/2-base-templates.md) | [Form Collections](https://github.com/phiamo/MopaBootstrapBundle/blob/master/Resources/doc/3.1-form-collections.md) >>
+<< [Using bootstrap in the layout](../usage/1-base-templates.md) | [Form Collections](2-form-collections.md) >>

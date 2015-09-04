@@ -9,27 +9,27 @@
  * file that was distributed with this source code.
  */
 
-namespace Mopa\Bundle\BootstrapBundle\Form\Type;
+namespace Mopa\Bundle\BootstrapBundle\Form\Extension;
 
-use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\FormInterface;
-use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\Form\AbstractTypeExtension;
+use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Form\FormView;
 
 /**
- * Type for Tabs handling
+ * Extension for displaying 'inline' sub-forms.
  *
- * @author phiamo <phiamo@googlemail.com>
+ * @author peshi <peshis@gmail.com>
  */
-class TabsType extends AbstractType
+class EmbedFormExtension extends AbstractTypeExtension
 {
     /**
      * {@inheritdoc}
      */
-    public function buildView(FormView $view, FormInterface $form, array $options)
+    public function getExtendedType()
     {
-        $view->vars['tabs'] = $options['tabs'];
+        return 'form';
     }
 
     /**
@@ -47,16 +47,17 @@ class TabsType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
-            'tabs' => array(),
-        ));
+        $resolver->setDefaults(
+            array(
+                'embed_form' => null,
+            )
+        );
     }
-
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function buildView(FormView $view, FormInterface $form, array $options)
     {
-        return 'tabs';
+        $view->vars['embed_form'] = $options['embed_form'];
     }
 }

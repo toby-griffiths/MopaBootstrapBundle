@@ -19,7 +19,7 @@ Make especially sure that your subforms have these options set:
 ```
 Otherwise you will have unexpected repeating forms ...
 
-Make sure you included the mopabootstrap-collections.js to have the javascript code loaded and available
+Make sure you included the mopabootstrap-collection.js to have the javascript code loaded and available
 
 Add and Remove Buttons
 ----------------------
@@ -101,4 +101,4 @@ That's it.
 
 ---
 
-<< [Form Extensions](https://github.com/phiamo/MopaBootstrapBundle/blob/master/Resources/doc/3-form-extension-templates.md) | [Form Tabs](https://github.com/phiamo/MopaBootstrapBundle/blob/master/Resources/doc/3.2-form-tabs.md) >>
+<< [Form Extensions](1-form-extension-templates.md) | [Form Tabs](3-form-tabs.md) >>

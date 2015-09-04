@@ -2,6 +2,7 @@
 
 namespace Mopa\Bundle\BootstrapBundle\Tests\Form;
 
+use Mopa\Bundle\BootstrapBundle\Form\Extension\EmbedFormExtension;
 use Mopa\Bundle\BootstrapBundle\Form\Extension\ErrorTypeFormTypeExtension;
 use Mopa\Bundle\BootstrapBundle\Form\Extension\HelpFormTypeExtension;
 use Mopa\Bundle\BootstrapBundle\Form\Extension\HorizontalFormTypeExtension;
@@ -16,6 +17,7 @@ use Symfony\Bridge\Twig\Extension\TranslationExtension;
 use Symfony\Bridge\Twig\Form\TwigRenderer;
 use Symfony\Bridge\Twig\Form\TwigRendererEngine;
 use Symfony\Bridge\Twig\Tests\Extension\Fixtures\StubTranslator;
+use Symfony\Component\Form\Forms;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\Form\PreloadedExtension;
 use Symfony\Component\Form\Test\FormIntegrationTestCase;
@@ -26,10 +28,13 @@ abstract class AbstractDivLayoutTest extends FormIntegrationTestCase
     protected $extension;
     protected $tabFactory;
 
+    /**
+     * @throws \Twig_Error_Loader
+     */
     protected function setUp()
     {
         // Setup factory for tabs
-        $this->tabFactory = \Symfony\Component\Form\Forms::createFormFactory();
+        $this->tabFactory = Forms::createFormFactory();
 
         parent::setUp();
 
@@ -68,6 +73,9 @@ abstract class AbstractDivLayoutTest extends FormIntegrationTestCase
         $this->extension->initRuntime($environment);
     }
 
+    /**
+     * @return PreloadedExtension[]
+     */
     protected function getExtensions()
     {
         return array(new PreloadedExtension(array(), array(
@@ -77,6 +85,7 @@ abstract class AbstractDivLayoutTest extends FormIntegrationTestCase
                 $this->getLegendFormTypeExtension(),
                 $this->getHorizontalFormTypeExtension(),
                 $this->getErrorTypeFormTypeExtension(),
+                $this->getEmbedFormExtension(),
                 $this->getTabbedFormTypeExtension(),
             ),
             'text' => array(
@@ -85,6 +94,9 @@ abstract class AbstractDivLayoutTest extends FormIntegrationTestCase
         )));
     }
 
+    /**
+     * @return HelpFormTypeExtension
+     */
     protected function getHelpFormTypeExtension()
     {
         $popoverOptions = array(
@@ -114,6 +126,9 @@ abstract class AbstractDivLayoutTest extends FormIntegrationTestCase
         ));
     }
 
+    /**
+     * @return WidgetFormTypeExtension
+     */
     protected function getWidgetFormTypeExtension()
     {
         return new WidgetFormTypeExtension(array(
@@ -121,6 +136,9 @@ abstract class AbstractDivLayoutTest extends FormIntegrationTestCase
         ));
     }
 
+    /**
+     * @return LegendFormTypeExtension
+     */
     protected function getLegendFormTypeExtension()
     {
         return new LegendFormTypeExtension(array(
@@ -133,6 +151,9 @@ abstract class AbstractDivLayoutTest extends FormIntegrationTestCase
         ));
     }
 
+    /**
+     * @return HorizontalFormTypeExtension
+     */
     protected function getHorizontalFormTypeExtension()
     {
         return new HorizontalFormTypeExtension(array(
@@ -143,6 +164,9 @@ abstract class AbstractDivLayoutTest extends FormIntegrationTestCase
         ));
     }
 
+    /**
+     * @return ErrorTypeFormTypeExtension
+     */
     protected function getErrorTypeFormTypeExtension()
     {
         return new ErrorTypeFormTypeExtension(array(
@@ -150,11 +174,27 @@ abstract class AbstractDivLayoutTest extends FormIntegrationTestCase
         ));
     }
 
+    /**
+     * @return EmbedFormExtension
+     */
+    protected function getEmbedFormExtension()
+    {
+        return new EmbedFormExtension(array(
+            'embed_form' => true,
+        ));
+    }
+
+    /**
+     * @return StaticTextExtension
+     */
     protected function getStaticTextFormTypeExtension()
     {
         return new StaticTextExtension();
     }
 
+    /**
+     * @return TabbedFormTypeExtension
+     */
     protected function getTabbedFormTypeExtension()
     {
         return new TabbedFormTypeExtension($this->tabFactory, array(
@@ -162,6 +202,11 @@ abstract class AbstractDivLayoutTest extends FormIntegrationTestCase
         ));
     }
 
+    /**
+     * @param string $html
+     * @param string $expression
+     * @param int    $count
+     */
     protected function assertMatchesXpath($html, $expression, $count = 1)
     {
         $dom = new \DomDocument('UTF-8');
@@ -191,31 +236,62 @@ abstract class AbstractDivLayoutTest extends FormIntegrationTestCase
         }
     }
 
+    /**
+     * @param string $html
+     *
+     * @return string
+     */
     protected function removeBreaks($html)
     {
         return str_replace('&nbsp;', '', $html);
     }
 
+    /**
+     * @param FormView $view
+     * @param array    $vars
+     *
+     * @return string
+     */
     protected function renderForm(FormView $view, array $vars = array())
     {
         return (string) $this->extension->renderer->renderBlock($view, 'form', $vars);
     }
 
+    /**
+     * @param FormView $view
+     * @param array    $vars
+     *
+     * @return string
+     */
     protected function renderRow(FormView $view, array $vars = array())
     {
         return (string) $this->extension->renderer->searchAndRenderBlock($view, 'row', $vars);
     }
 
+    /**
+     * @param FormView $view
+     * @param array    $vars
+     *
+     * @return string
+     */
     protected function renderWidget(FormView $view, array $vars = array())
     {
         return (string) $this->extension->renderer->searchAndRenderBlock($view, 'widget', $vars);
     }
 
+    /**
+     * @param FormView $view
+     * @param string   $label
+     * @param array    $vars
+     *
+     * @return string
+     */
     protected function renderLabel(FormView $view, $label = null, array $vars = array())
     {
         if ($label !== null) {
             $vars += array('label' => $label);
         }
+
         return (string) $this->extension->renderer->searchAndRenderBlock($view, 'label', $vars);
     }
 }
