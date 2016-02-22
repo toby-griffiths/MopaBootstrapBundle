@@ -51,7 +51,10 @@ class TabbedFormTypeExtension extends AbstractTypeExtension
      */
     public function getExtendedType()
     {
-        return 'form';
+        return method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix')
+            ? 'Symfony\Component\Form\Extension\Core\Type\FormType'
+            : 'form' // SF <2.8 BC
+        ;
     }
 
     /**
@@ -121,8 +124,12 @@ class TabbedFormTypeExtension extends AbstractTypeExtension
 
         $activeTab->vars['tab_active'] = true;
         $tabs[$activeTab->vars['tab_index']]['active'] = true;
-
-        $tabsForm = $this->formFactory->create(new TabsType(), null, array(
+    
+        $tabsType = method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix')
+            ? 'Mopa\Bundle\BootstrapBundle\Form\Type\TabsType'
+            : new TabsType() // SF <2.8 BC
+        ;
+        $tabsForm = $this->formFactory->create($tabsType, null, array(
             'tabs' => $tabs,
             'attr' => array(
                 'class' => $options['tabs_class'],
